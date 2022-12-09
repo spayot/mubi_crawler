@@ -4,7 +4,7 @@
 **Example of queries** (e.g. show me Comedies with MetaScores higher than 80 available on Mubi.)
 
 ## Steps
-* Extract list of movies available to watch on Mubi, query MetaCritic to access meta_score, 
+* Extract list of movies available to watch on Mubi, query MetaCritic to access meta_score, and stores results as a table into a csv file
 
 ## Install
 `pip install -r requirements.txt`
