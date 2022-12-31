@@ -1,4 +1,5 @@
 import os
+import shutil
 from dataclasses import dataclass, field
 from datetime import datetime
 from multiprocessing import Pool
@@ -31,7 +32,7 @@ _HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
 }
 
-POOL_SIZE = 4
+POOL_SIZE = 1
 
 
 @dataclass
@@ -47,7 +48,7 @@ class MubiMovie:
     meta_score: int = field(default=None)
 
     def __post_init__(self):
-        meta_critic = MetaCriticMovie.from_title(self.title)
+        meta_critic = MetaCriticMovie.from_title(self.title, self.year)
         if meta_critic:
             self.meta_score = meta_critic.meta_score
 
@@ -160,3 +161,5 @@ class MubiAllFilmGroups:
         )
 
         df.to_csv(datapath / f"{self.extraction_date}_mubi.csv")
+
+        shutil.rmtree(datapath / self.extraction_date)
